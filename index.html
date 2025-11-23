@@ -6,7 +6,6 @@
     <title>Katha Tours And Travels - Since 2011</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -20,12 +19,11 @@
             --dark: #333;
             --light: #f5f5f5;
             --gray: #777;
-            --light-bg: #f9f9f9;
-            --section-bg: #ffffff;
+            --accent: #34a853;
         }
 
         body {
-            background-color: var(--light-bg);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: var(--dark);
             line-height: 1.6;
         }
@@ -51,11 +49,14 @@
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
 
         .section-title p {
             color: var(--gray);
             font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .section-title::after {
@@ -67,11 +68,11 @@
             width: 80px;
             height: 3px;
             background: var(--secondary);
+            border-radius: 2px;
         }
 
-        /* Header Styles */
         header {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(26, 115, 232, 0.85), rgba(26, 115, 232, 0.9)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             color: white;
@@ -82,16 +83,56 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .logo {
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            z-index: 2;
+        }
+
+        .temp-logo {
+            width: 120px;
+            height: 120px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid white;
         }
 
-        .logo h1 {
+        .temp-logo i {
+            font-size: 50px;
+            color: white;
+        }
+
+        .logo-text {
+            text-align: center;
+        }
+
+        .logo-text h1 {
             font-size: 3.5rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
         }
 
         .tagline {
@@ -99,36 +140,58 @@
             margin-bottom: 10px;
             color: var(--secondary);
             font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .since {
             font-size: 1.2rem;
             margin-bottom: 30px;
             opacity: 0.9;
+            background: rgba(0,0,0,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
         }
 
         .cta-button {
             display: inline-block;
             background: var(--secondary);
             color: var(--dark);
-            padding: 12px 30px;
+            padding: 15px 40px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1.1rem;
             transition: all 0.3s ease;
             margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 2;
+            position: relative;
+            overflow: hidden;
         }
 
         .cta-button:hover {
             background: #e6a800;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
-        /* Category Section */
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
         .category-section {
-            background-color: var(--section-bg);
+            background: white;
+            position: relative;
+        }
+
+        .category-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
         }
 
         .category {
@@ -145,6 +208,7 @@
             color: var(--primary);
             position: relative;
             display: inline-block;
+            padding: 0 20px;
         }
 
         .category-title h3::after {
@@ -156,14 +220,15 @@
             width: 60px;
             height: 3px;
             background: var(--secondary);
+            border-radius: 2px;
         }
 
         .horizontal-scroll {
             display: flex;
             overflow-x: auto;
-            padding: 20px 0;
+            padding: 20px 10px;
             scroll-behavior: smooth;
-            gap: 20px;
+            gap: 25px;
         }
 
         .horizontal-scroll::-webkit-scrollbar {
@@ -183,24 +248,44 @@
         .car-card {
             min-width: 280px;
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
         }
 
         .car-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
         .car-image {
             height: 180px;
-            background-color: #eee;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--gray);
+            color: white;
             font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .car-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .car-image i {
+            font-size: 60px;
+            z-index: 1;
+            opacity: 0.8;
         }
 
         .car-info {
@@ -216,6 +301,7 @@
         .car-info p {
             color: var(--gray);
             margin-bottom: 15px;
+            font-size: 0.95rem;
         }
 
         .rent-price {
@@ -223,31 +309,52 @@
             font-weight: bold;
             color: var(--secondary);
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .rent-price::before {
+            content: '₹';
+            font-size: 1.2rem;
+            margin-right: 2px;
         }
 
         .book-btn {
             display: block;
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background: var(--primary);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            font-size: 1rem;
         }
 
         .book-btn:hover {
             background: #0d5cb6;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
 
-        /* Tourist Attractions */
         .attractions-section {
-            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1594736797933-d0ea3ff8db41?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), url('https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            position: relative;
+        }
+
+        .attractions-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
         }
 
         .attractions-grid {
@@ -258,24 +365,44 @@
 
         .attraction-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
         }
 
         .attraction-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
         .attraction-image {
             height: 200px;
-            background-color: #eee;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--gray);
+            color: white;
             font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .attraction-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .attraction-image i {
+            font-size: 60px;
+            z-index: 1;
+            opacity: 0.8;
         }
 
         .attraction-info {
@@ -291,11 +418,22 @@
         .attraction-info p {
             color: var(--gray);
             margin-bottom: 15px;
+            font-size: 0.95rem;
         }
 
-        /* Contact Section */
         .contact-section {
-            background-color: white;
+            background: white;
+            position: relative;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(to right, var(--accent), var(--primary));
         }
 
         .contact-container {
@@ -309,6 +447,12 @@
             min-width: 300px;
         }
 
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
         .contact-details {
             margin-top: 30px;
         }
@@ -316,7 +460,16 @@
         .contact-item {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: #f0f7ff;
+            transform: translateX(5px);
         }
 
         .contact-icon {
@@ -330,6 +483,18 @@
             margin-right: 15px;
             color: white;
             font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .contact-text p {
+            color: var(--gray);
+            margin: 0;
         }
 
         .whatsapp-btn {
@@ -343,12 +508,13 @@
             font-weight: bold;
             margin-top: 10px;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
         }
 
         .whatsapp-btn:hover {
             background: #128C7E;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
         }
 
         .whatsapp-btn i {
@@ -359,6 +525,16 @@
         .contact-form {
             flex: 1;
             min-width: 300px;
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .contact-form h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
         }
 
         .form-group {
@@ -369,14 +545,22 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
+            color: var(--dark);
         }
 
         .form-control {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+            outline: none;
         }
 
         .submit-btn {
@@ -384,21 +568,35 @@
             color: white;
             border: none;
             padding: 12px 30px;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
         }
 
         .submit-btn:hover {
             background: #0d5cb6;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
 
-        /* Footer */
         footer {
-            background: var(--dark);
+            background: linear-gradient(135deg, var(--dark) 0%, #222 100%);
             color: white;
             padding: 40px 0 20px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
         }
 
         .footer-content {
@@ -418,6 +616,11 @@
             font-size: 1.8rem;
             margin-bottom: 10px;
             color: var(--secondary);
+        }
+
+        .footer-logo p {
+            color: #ccc;
+            line-height: 1.6;
         }
 
         .footer-links {
@@ -444,10 +647,18 @@
             color: #ccc;
             text-decoration: none;
             transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
         }
 
         .footer-links a:hover {
             color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .footer-links a i {
+            margin-right: 8px;
+            font-size: 0.9rem;
         }
 
         .footer-bottom {
@@ -465,6 +676,7 @@
 
         .powered-by span {
             margin-right: 10px;
+            color: #aaa;
         }
 
         .quality-mango-logo {
@@ -489,11 +701,16 @@
         .developer-credit a {
             color: var(--secondary);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        /* Responsive Design */
+        .developer-credit a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
-            .logo h1 {
+            .logo-text h1 {
                 font-size: 2.5rem;
             }
             
@@ -512,10 +729,19 @@
             .car-card {
                 min-width: 250px;
             }
+            
+            .temp-logo {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .temp-logo i {
+                font-size: 40px;
+            }
         }
 
         @media (max-width: 480px) {
-            .logo h1 {
+            .logo-text h1 {
                 font-size: 2rem;
             }
             
@@ -530,21 +756,33 @@
             .car-card {
                 min-width: 220px;
             }
+            
+            .temp-logo {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .temp-logo i {
+                font-size: 30px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header Section -->
     <header>
-        <div class="logo">
-            <h1>Katha Tours And Travels</h1>
-            <div class="tagline">Your Journey, Our Responsibility</div>
-            <div class="since">Since 2011</div>
+        <div class="logo-container">
+            <div class="temp-logo">
+                <i class="fas fa-car"></i>
+            </div>
+            <div class="logo-text">
+                <h1>Katha Tours And Travels</h1>
+                <div class="tagline">Your Journey, Our Responsibility</div>
+                <div class="since">Since 2011</div>
+            </div>
         </div>
         <a href="#contact" class="cta-button">Book Your Ride Now</a>
     </header>
 
-    <!-- Car Categories Section -->
     <section class="category-section" id="cars">
         <div class="container">
             <div class="section-title">
@@ -552,159 +790,146 @@
                 <p>Choose from our wide range of vehicles for your comfortable journey</p>
             </div>
 
-            <!-- 4 Seater Category -->
             <div class="category">
                 <div class="category-title">
                     <h3>4 Seater Sedan</h3>
                 </div>
                 <div class="horizontal-scroll">
                     <div class="car-card">
-                        <div class="car-image">Aura Image</div>
+                        <div class="car-image"><i class="fas fa-car-side"></i></div>
                         <div class="car-info">
                             <h4>Hyundai Aura</h4>
-                            <p>Comfortable sedan with premium features</p>
-                            <div class="rent-price">₹15/km</div>
+                            <p>Comfortable sedan with premium features and excellent fuel efficiency</p>
+                            <div class="rent-price">15/km</div>
                             <button class="book-btn">Book Now</button>
                         </div>
                     </div>
                     <div class="car-card">
-                        <div class="car-image">Dezire Image</div>
+                        <div class="car-image"><i class="fas fa-car-side"></i></div>
                         <div class="car-info">
                             <h4>Maruti Suzuki Dezire</h4>
-                            <p>Fuel efficient and reliable sedan</p>
-                            <div class="rent-price">₹14/km</div>
+                            <p>Fuel efficient and reliable sedan for city and highway travel</p>
+                            <div class="rent-price">14/km</div>
                             <button class="book-btn">Book Now</button>
                         </div>
                     </div>
-                    <!-- Add more 4 seater cars as needed -->
                 </div>
             </div>
 
-            <!-- Hatchback Category -->
             <div class="category">
                 <div class="category-title">
                     <h3>Hatchback</h3>
                 </div>
                 <div class="horizontal-scroll">
                     <div class="car-card">
-                        <div class="car-image">Tiago Image</div>
+                        <div class="car-image"><i class="fas fa-car"></i></div>
                         <div class="car-info">
                             <h4>Tata Tiago</h4>
-                            <p>Compact and efficient city car</p>
-                            <div class="rent-price">₹12/km</div>
+                            <p>Compact and efficient city car with modern features</p>
+                            <div class="rent-price">12/km</div>
                             <button class="book-btn">Book Now</button>
                         </div>
                     </div>
                     <div class="car-card">
-                        <div class="car-image">Swift Image</div>
+                        <div class="car-image"><i class="fas fa-car"></i></div>
                         <div class="car-info">
                             <h4>Maruti Suzuki Swift</h4>
-                            <p>Sporty hatchback with great performance</p>
-                            <div class="rent-price">₹13/km</div>
+                            <p>Sporty hatchback with great performance and style</p>
+                            <div class="rent-price">13/km</div>
                             <button class="book-btn">Book Now</button>
                         </div>
                     </div>
-                    <!-- Add more hatchback cars as needed -->
                 </div>
             </div>
 
-            <!-- 7 Seater Category -->
             <div class="category">
                 <div class="category-title">
                     <h3>7 Seater</h3>
                 </div>
                 <div class="horizontal-scroll">
                     <div class="car-card">
-                        <div class="car-image">Ertiga Image</div>
+                        <div class="car-image"><i class="fas fa-shuttle-van"></i></div>
                         <div class="car-info">
                             <h4>Maruti Suzuki Ertiga</h4>
-                            <p>Spacious and comfortable family vehicle</p>
-                            <div class="rent-price">₹18/km</div>
+                            <p>Spacious and comfortable family vehicle with ample luggage space</p>
+                            <div class="rent-price">18/km</div>
                             <button class="book-btn">Book Now</button>
                         </div>
                     </div>
                     <div class="car-card">
-                        <div class="car-image">Innova Image</div>
+                        <div class="car-image"><i class="fas fa-shuttle-van"></i></div>
                         <div class="car-info">
                             <h4>Toyota Innova</h4>
-                            <p>Premium MPV with superior comfort</p>
-                            <div class="rent-price">₹22/km</div>
+                            <p>Premium MPV with superior comfort and reliability</p>
+                            <div class="rent-price">22/km</div>
                             <button class="book-btn">Book Now</button>
                         </div>
                     </div>
                     <div class="car-card">
-                        <div class="car-image">Kia Carnival Image</div>
+                        <div class="car-image"><i class="fas fa-shuttle-van"></i></div>
                         <div class="car-info">
                             <h4>Kia Carnival</h4>
-                            <p>Luxury MPV with premium features</p>
-                            <div class="rent-price">₹30/km</div>
+                            <p>Luxury MPV with premium features and spacious interior</p>
+                            <div class="rent-price">30/km</div>
                             <button class="book-btn">Book Now</button>
                         </div>
                     </div>
-                    <!-- Add more 7 seater cars as needed -->
                 </div>
             </div>
 
-            <!-- 9 Seater Category -->
             <div class="category">
                 <div class="category-title">
                     <h3>9 Seater</h3>
                 </div>
                 <div class="horizontal-scroll">
                     <div class="car-card">
-                        <div class="car-image">Sumo Image</div>
+                        <div class="car-image"><i class="fas fa-bus"></i></div>
                         <div class="car-info">
                             <h4>Tata Sumo</h4>
-                            <p>Rugged and reliable for all terrains</p>
-                            <div class="rent-price">₹20/km</div>
+                            <p>Rugged and reliable for all terrains with powerful performance</p>
+                            <div class="rent-price">20/km</div>
                             <button class="book-btn">Book Now</button>
                         </div>
                     </div>
-                    <!-- Add more 9 seater cars as needed -->
                 </div>
             </div>
 
-            <!-- 17 Seater Category -->
             <div class="category">
                 <div class="category-title">
                     <h3>17 Seater</h3>
                 </div>
                 <div class="horizontal-scroll">
                     <div class="car-card">
-                        <div class="car-image">Tempo Traveler Image</div>
+                        <div class="car-image"><i class="fas fa-bus-alt"></i></div>
                         <div class="car-info">
                             <h4>Force Tempo Traveler</h4>
-                            <p>Comfortable group travel solution</p>
-                            <div class="rent-price">₹28/km</div>
+                            <p>Comfortable group travel solution with AC and ample space</p>
+                            <div class="rent-price">28/km</div>
                             <button class="book-btn">Book Now</button>
                         </div>
                     </div>
-                    <!-- Add more 17 seater cars as needed -->
                 </div>
             </div>
 
-            <!-- 21 Seater Category -->
             <div class="category">
                 <div class="category-title">
                     <h3>21 Seater</h3>
                 </div>
                 <div class="horizontal-scroll">
                     <div class="car-card">
-                        <div class="car-image">Tempo Traveler Image</div>
+                        <div class="car-image"><i class="fas fa-bus-alt"></i></div>
                         <div class="car-info">
                             <h4>Force Tempo Traveler</h4>
-                            <p>Spacious vehicle for large groups</p>
-                            <div class="rent-price">₹32/km</div>
+                            <p>Spacious vehicle for large groups with comfortable seating</p>
+                            <div class="rent-price">32/km</div>
                             <button class="book-btn">Book Now</button>
                         </div>
                     </div>
-                    <!-- Add more 21 seater cars as needed -->
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tourist Attractions Section -->
     <section class="attractions-section" id="attractions">
         <div class="container">
             <div class="section-title">
@@ -713,39 +938,37 @@
             </div>
             <div class="attractions-grid">
                 <div class="attraction-card">
-                    <div class="attraction-image">Ratnagiri Beach Image</div>
+                    <div class="attraction-image"><i class="fas fa-umbrella-beach"></i></div>
                     <div class="attraction-info">
                         <h4>Ratnagiri Beach</h4>
-                        <p>Beautiful sandy beach with stunning sunset views and peaceful atmosphere.</p>
+                        <p>Beautiful sandy beach with stunning sunset views and peaceful atmosphere. Perfect for relaxing and water sports.</p>
                     </div>
                 </div>
                 <div class="attraction-card">
-                    <div class="attraction-image">Thibaw Palace Image</div>
+                    <div class="attraction-image"><i class="fas fa-landmark"></i></div>
                     <div class="attraction-info">
                         <h4>Thibaw Palace</h4>
-                        <p>Historic palace of the last Burmese king, showcasing colonial architecture.</p>
+                        <p>Historic palace of the last Burmese king, showcasing colonial architecture and rich cultural heritage.</p>
                     </div>
                 </div>
                 <div class="attraction-card">
-                    <div class="attraction-image">Ganpatipule Temple Image</div>
+                    <div class="attraction-image"><i class="fas fa-place-of-worship"></i></div>
                     <div class="attraction-info">
                         <h4>Ganpatipule Temple</h4>
-                        <p>Famous temple dedicated to Lord Ganesha, located by the Arabian Sea.</p>
+                        <p>Famous temple dedicated to Lord Ganesha, located by the Arabian Sea with spiritual significance.</p>
                     </div>
                 </div>
                 <div class="attraction-card">
-                    <div class="attraction-image">Jaigad Fort Image</div>
+                    <div class="attraction-image"><i class="fas fa-fort-awesome"></i></div>
                     <div class="attraction-info">
                         <h4>Jaigad Fort</h4>
-                        <p>16th-century fort offering panoramic views of the sea and surrounding areas.</p>
+                        <p>16th-century fort offering panoramic views of the sea and surrounding areas with historical importance.</p>
                     </div>
                 </div>
-                <!-- Add more attraction cards as needed -->
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="contact-section" id="contact">
         <div class="container">
             <div class="section-title">
@@ -760,7 +983,7 @@
                             <div class="contact-icon">
                                 <i class="fas fa-user"></i>
                             </div>
-                            <div>
+                            <div class="contact-text">
                                 <h4>Contact Person</h4>
                                 <p>Mr. Sanket Bankar</p>
                             </div>
@@ -769,7 +992,7 @@
                             <div class="contact-icon">
                                 <i class="fas fa-phone"></i>
                             </div>
-                            <div>
+                            <div class="contact-text">
                                 <h4>Phone Number</h4>
                                 <p>+91 XXXXX XXXXX</p>
                                 <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-btn" target="_blank">
@@ -781,7 +1004,7 @@
                             <div class="contact-icon">
                                 <i class="fas fa-envelope"></i>
                             </div>
-                            <div>
+                            <div class="contact-text">
                                 <h4>Email Address</h4>
                                 <p>info@kathatours.com</p>
                             </div>
@@ -790,7 +1013,7 @@
                             <div class="contact-icon">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <div>
+                            <div class="contact-text">
                                 <h4>Location</h4>
                                 <p>Ratnagiri, Maharashtra, India</p>
                             </div>
@@ -823,32 +1046,31 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
                     <h3>Katha Tours And Travels</h3>
-                    <p>Your trusted travel partner since 2011. We provide comfortable and reliable transportation services for all your travel needs.</p>
+                    <p>Your trusted travel partner since 2011. We provide comfortable and reliable transportation services for all your travel needs across Maharashtra.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#cars">Our Fleet</a></li>
-                        <li><a href="#attractions">Tourist Attractions</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#cars"><i class="fas fa-chevron-right"></i> Our Fleet</a></li>
+                        <li><a href="#attractions"><i class="fas fa-chevron-right"></i> Tourist Attractions</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms & Conditions</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="#">Local Tours</a></li>
-                        <li><a href="#">Outstation Trips</a></li>
-                        <li><a href="#">Airport Transfers</a></li>
-                        <li><a href="#">Corporate Travel</a></li>
-                        <li><a href="#">Wedding Services</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Local Tours</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Outstation Trips</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Airport Transfers</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Corporate Travel</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Wedding Services</a></li>
                     </ul>
                 </div>
             </div>
@@ -866,7 +1088,6 @@
     </footer>
 
     <script>
-        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -884,13 +1105,26 @@
             });
         });
 
-        // WhatsApp redirect with phone number
         document.querySelector('.whatsapp-btn').addEventListener('click', function(e) {
-            // Replace with actual phone number
             const phoneNumber = '91XXXXXXXXXX';
             const message = 'Hello, I would like to inquire about your car rental services.';
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
+        });
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.car-card, .attraction-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
         });
     </script>
 </body>
